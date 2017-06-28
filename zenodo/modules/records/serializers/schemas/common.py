@@ -244,6 +244,7 @@ class CommonMetadataSchemaV1(Schema, StrictKeysMixin, RefResolverMixin):
     related_identifiers = fields.Nested(RelatedIdentifierSchemaV1, many=True)
     alternate_identifiers = fields.Nested(
         AlternateIdentifierSchemaV1, many=True)
+    language = fields.TrimmedString(required=False, attribute=validate.Length(min=2, max=2))
 
     @validates('embargo_date')
     def validate_embargo_date(self, value):

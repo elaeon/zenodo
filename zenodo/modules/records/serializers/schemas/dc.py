@@ -29,6 +29,7 @@ from __future__ import absolute_import, print_function
 from marshmallow import Schema, fields
 
 from ...models import ObjectType
+from flask import current_app
 
 
 class DublinCoreV1(Schema):
@@ -51,8 +52,12 @@ class DublinCoreV1(Schema):
     def get_identifiers(self, obj):
         """Get identifiers."""
         items = [obj['metadata'].get('doi', u'')]
-        items.append(u'https://zenodo.org/record/{0}'.format(
-            obj['metadata']['recid']))
+        url = current_app.config['ZENODO_RECORDS_UI_LINKS_FORMAT'].format(
+            recid=obj['metadata']['recid'])
+        print("*********", url)
+        #items.append(u'https://zenodo.org/record/{0}'.format(
+        #    obj['metadata']['recid']))
+        items.append(url)
         oai = obj['metadata'].get('_oai', {}).get('id')
         if oai:
             items.append(oai)

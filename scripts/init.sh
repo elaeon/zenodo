@@ -26,7 +26,7 @@ zenodo db create
 zenodo index queue init
 zenodo index init
 zenodo fixtures init
-zenodo users create info@zenodo.org -a --password=123456
-zenodo access allow admin-access -e info@zenodo.org
-zenodo access allow deposit-admin-access -e info@zenodo.org
-zenodo fixtures loadcommunities info@zenodo.org
+zenodo users create agmartinez@inmegen.gob.mx -a --password=123456
+zenodo access allow admin-access -e agmartinez@inmegen.gob.mx
+zenodo access allow deposit-admin-access -e agmartinez@inmegen.gob.mx
+zenodo fixtures loadcommunities agmartinez@inmegen.gob.mx
