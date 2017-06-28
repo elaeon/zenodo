@@ -72,7 +72,7 @@ def _(x):
     return x
 
 #: Email address for support.
-SUPPORT_EMAIL = "info@zenodo.org"
+SUPPORT_EMAIL = "agmartinez@inmegen.gob.mx" #"info@zenodo.org"
 MAIL_SUPPRESS_SEND = True
 
 # DataCite
@@ -296,7 +296,7 @@ DEPOSIT_PID_MINTER = 'zenodo_record_minter'
 _PID = 'pid(depid,record_class="zenodo.modules.deposit.api:ZenodoDeposit")'
 #: Template for deposit list view.
 DEPOSIT_SEARCH_API = '/api/deposit/depositions'
-#: Mimetype for deposit search.
+#: Mimetype for deposit search. 
 DEPOSIT_SEARCH_MIMETYPE = 'application/vnd.zenodo.v1+json'
 #: Template for deposit list view.
 DEPOSIT_UI_INDEX_TEMPLATE = 'zenodo_deposit/index.html'
@@ -554,7 +554,7 @@ RECORDS_UI_DEFAULT_PERMISSION_FACTORY = \
 #: Default tombstone template.
 RECORDS_UI_TOMBSTONE_TEMPLATE = "zenodo_records/tombstone.html"
 
-ZENODO_RECORDS_UI_LINKS_FORMAT = "https://zenodo.org/record/{recid}"
+ZENODO_RECORDS_UI_LINKS_FORMAT = "http://repositorio.inmegen.gob.mx/record/{recid}" #"https://zenodo.org/record/{recid}"
 
 #: Files REST permission factory
 FILES_REST_PERMISSION_FACTORY = \
@@ -729,7 +729,7 @@ PREVIEWER_CSV_VALIDATION_BYTES = 2 * 1024
 #: Index to use for the OAI-PMH server.
 OAISERVER_RECORD_INDEX = 'records'
 #: OAI identifier prefix
-OAISERVER_ID_PREFIX = 'oai:zenodo.org:'
+OAISERVER_ID_PREFIX = 'oai:repositorio.inmegen.gob.mx:' #'oai:zenodo.org:'
 #: Number of records to return per page in OAI-PMH results.
 OAISERVER_PAGE_SIZE = 25
 #: Support email for OAI-PMH.
@@ -832,9 +832,9 @@ COMMUNITIES_REQUEST_EMAIL_SENDER = SUPPORT_EMAIL
 # Theme
 # =====
 #: Default site name.
-THEME_SITENAME = _("Zenodo")
+THEME_SITENAME = "Inmegen" #_("Zenodo")
 #: Default site URL (used only when not in a context - e.g. like celery tasks).
-THEME_SITEURL = "https://zenodo.org"
+THEME_SITEURL = "http://repositorio.inmegen.gob.mx" #"https://zenodo.org"
 #: Endpoint for breadcrumb root.
 THEME_BREADCRUMB_ROOT_ENDPOINT = 'zenodo_frontpage.index'
 #: Twitter handle.

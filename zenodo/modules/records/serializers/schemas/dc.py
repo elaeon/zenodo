@@ -54,7 +54,6 @@ class DublinCoreV1(Schema):
         items = [obj['metadata'].get('doi', u'')]
         url = current_app.config['ZENODO_RECORDS_UI_LINKS_FORMAT'].format(
             recid=obj['metadata']['recid'])
-        print("*********", url)
         #items.append(u'https://zenodo.org/record/{0}'.format(
         #    obj['metadata']['recid']))
         items.append(url)
