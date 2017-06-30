@@ -22,8 +22,8 @@
 
 $btn-font-weight: 300;
 
-$color1-gradient: #2BBCFF; //lighten(@color1, 15%);
-$color1: #0047A8;
+$color1-gradient: #fff; //lighten(@color1, 15%);
+$color1: #ccc;
 $color2: #0067c9;
 $color3: #7A9A95;
 $color4: #EF6D3B;
@@ -40,15 +40,15 @@ $headings45-font-weight: 400;
 
 $navbar-brand-padding-vertical: 20px;
 $navbar-default-bg: $color1;
-$navbar-default-brand-color: #fff;
+$navbar-default-brand-color: #000;
 $navbar-default-link-color: lighten($color1, 60%);
-$navbar-default-link-active-color: #fff;
+$navbar-default-link-active-color: #000;
 $navbar-default-link-active-bg: transparentize(#fff, 0.9);
-$navbar-default-link-hover-color: #fff;
+$navbar-default-link-hover-color: #000;
 $navbar-default-link-hover-bg: transparentize(#fff, 0.8);
 $navbar-height: 96px;
 
-$text-white: #fff;
+$text-white: #000;
 
 $brand-font-family: $font-family-sans-serif;
 $brand-font-size: 40px;

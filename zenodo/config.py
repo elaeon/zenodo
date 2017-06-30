@@ -838,9 +838,9 @@ THEME_SITEURL = "http://repositorio.inmegen.gob.mx" #"https://zenodo.org"
 #: Endpoint for breadcrumb root.
 THEME_BREADCRUMB_ROOT_ENDPOINT = 'zenodo_frontpage.index'
 #: Twitter handle.
-THEME_TWITTERHANDLE = "@zenodo_org"
+THEME_TWITTERHANDLE = "@inmegen"
 #: Path to logo file.
-THEME_LOGO = "img/zenodo.svg"
+THEME_LOGO = "img/inmegen.png" #"img/zenodo.svg"
 #: Google Site Verification ids.
 THEME_GOOGLE_SITE_VERIFICATION = [
     "5fPGCLllnWrvFxH9QWI0l1TadV7byeEvfPcyK2VkS_s",
