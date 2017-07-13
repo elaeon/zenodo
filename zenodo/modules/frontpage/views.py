@@ -27,6 +27,7 @@
 from __future__ import absolute_import, print_function
 
 from flask import Blueprint, render_template
+from flask import Response, json, current_app
 from flask_babelex import lazy_gettext as _
 from flask_menu import current_menu
 
@@ -72,3 +73,56 @@ def index():
 def ping():
     """Load balancer ping view."""
     return 'OK'
+
+
+@blueprint.route('/padron')
+#@cached(timeout=600, key_prefix='frontpage')
+def padron():
+    """Information base."""
+    
+    class Persona(object):
+        def __init__(self, correo, nombre, tel, pApellido, sApellido):
+            self.correo = correo
+            self.nombre = nombre
+            self.tel = tel
+            self.pApellido = pApellido
+            self.sApellido = sApellido
+
+    personas = [
+        Persona("agmartinez@inmegen.gob.mx", "Alejandro", "525553501900", "Martinez", "Romero")]
+    depositarios = []
+    for persona in personas:
+        depositarios.append({
+            "correo": persona.correo,
+            "nombre": persona.nombre,
+            "numTel": persona.tel,
+            "pApellido": persona.pApellido,
+            "sApellido": persona.sApellido})
+
+    return Response(
+        json.dumps({"depositarios": depositarios}), 
+        mimetype='application/json'
+    )
+
+
+@blueprint.route('/raking/articulos')
+def raking_articulos():
+    """Information base."""
+    import requests
+    import datetime
+
+    today = datetime.date.today().strftime("%Y-%m-%d")
+    url = "http://estadisticas.inmegen.gob.mx/index.php?module=API&method=Actions.getPageUrls&idSite=9&period=range&date=2017-06-30,{today}&format=JSON&token_auth={token}&expanded=0&flat=1&filter_pattern_recursive=record/*".format(token=current_app.config["TOKEN_AUTH_PIWIK"], today=today)
+    r = requests.get(url)
+    data = r.json()
+    articulos = []
+    for record in data:
+        articulos.append({
+            "id": record["url"],
+            "numero": record["nb_hits"]
+        })
+
+    return Response(
+        json.dumps({"articulos": articulos}), 
+        mimetype='application/json'
+    )

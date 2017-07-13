@@ -22,6 +22,25 @@
 # as an Intergovernmental Organization or submit itself to any jurisdiction.
 -#}
 {%- if config.THEME_PIWIK_ID %}
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//estadisticas.inmegen.gob.mx/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '{{config.THEME_PIWIK_ID}}']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//estadisticas.inmegen.gob.mx/piwik.php?idsite={{config.THEME_PIWIK_ID}}&rec=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+
+<!--
 <script type="text/javascript">
 var _paq = _paq || [];
 _paq.push(["setDomains", ["*.zenodo.org","*.zenodo.cern.ch","*.zenodo.eu","*.zenodo.net"]]);
@@ -36,4 +55,5 @@ _paq.push(["enableLinkTracking"]);
   g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
 })();
 </script>
+-->
 {%- endif %}
