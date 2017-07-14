@@ -34,6 +34,9 @@ from flask_menu import current_menu
 from ...modules.cache.pages import cached
 from .api import FrontpageRecordsSearch
 
+import requests
+import datetime
+
 blueprint = Blueprint(
     'zenodo_frontpage',
     __name__,
@@ -78,7 +81,7 @@ def ping():
 @blueprint.route('/padron')
 #@cached(timeout=600, key_prefix='frontpage')
 def padron():
-    """Information base."""
+    """Base information"""
     
     class Persona(object):
         def __init__(self, correo, nombre, tel, pApellido, sApellido):
@@ -107,12 +110,10 @@ def padron():
 
 @blueprint.route('/raking/articulos')
 def raking_articulos():
-    """Information base."""
-    import requests
-    import datetime
+    """Base information"""
 
     today = datetime.date.today().strftime("%Y-%m-%d")
-    url = "http://estadisticas.inmegen.gob.mx/index.php?module=API&method=Actions.getPageUrls&idSite=9&period=range&date=2017-06-30,{today}&format=JSON&token_auth={token}&expanded=0&flat=1&filter_pattern_recursive=record/*".format(token=current_app.config["TOKEN_AUTH_PIWIK"], today=today)
+    url = "http://estadisticas.inmegen.gob.mx/index.php?module=API&method=Actions.getPageUrls&idSite=9&period=range&date=2017-06-30,{today}&format=JSON&token_auth={token}&expanded=0&flat=1&filter_limit=15&filter_pattern_recursive=record/*".format(token=current_app.config["TOKEN_AUTH_PIWIK"], today=today)
     r = requests.get(url)
     data = r.json()
     articulos = []
@@ -126,3 +127,25 @@ def raking_articulos():
         json.dumps({"articulos": articulos}), 
         mimetype='application/json'
     )
+
+
+@blueprint.route('/descargas')
+def descargas():
+    """Base information"""
+
+    today = datetime.date.today().strftime("%Y-%m-%d")
+    url = "http://estadisticas.inmegen.gob.mx/index.php?module=API&method=Actions.getDownloads&idSite=9&period=range&date=2017-06-30,{today}&filter_limit=15&format=JSON&token_auth={token}".format(token=current_app.config["TOKEN_AUTH_PIWIK"], today=today)
+    r = requests.get(url)
+    data = r.json()
+    descargas = []
+    for record in data:
+        articulos.append({
+            "id": record["url"],
+            "numero": record["nb_hits"]
+        })
+
+    return Response(
+        json.dumps({"descargas": descargas}), 
+        mimetype='application/json'
+    )
+
