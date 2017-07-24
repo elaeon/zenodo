@@ -64,6 +64,7 @@ class DublinCoreV1(Schema):
 
     def get_creators(self, obj):
         """Get creators."""
+        #print(obj['metadata'].get('creators', []))
         return [c['name'] for c in obj['metadata'].get('creators', [])]
 
     def get_relations(self, obj):
@@ -117,7 +118,14 @@ class DublinCoreV1(Schema):
 
     def get_subjects(self, obj):
         """Get subjects."""
-        return obj['metadata'].get('keywords', [])
+        subjects = []
+        for subject in obj['metadata'].get('subjects', []):
+            id_ = subject['identifier'].split("/").pop()
+            subjects.append(u'info:eu-repo/classification/cti/{0}'.format(
+                id_))
+            #subjects.append(subject["term"])
+        subjects.extend(";".join(obj['metadata'].get('keywords', [])))
+        return subjects
 
     def get_publishers(self, obj):
         """Get publishers."""
