@@ -149,3 +149,13 @@ def descargas():
         mimetype='application/json'
     )
 
+
+@blueprint.route('/ranking/autores')
+def autores():
+    """Base information"""
+
+    return Response(
+        json.dumps({"autores": []}), 
+        mimetype='application/json'
+    )
+
