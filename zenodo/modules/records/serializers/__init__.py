@@ -31,7 +31,7 @@ from invenio_marc21.serializers.marcxml import MARCXMLSerializer
 from invenio_records_rest.serializers.citeproc import CiteprocSerializer
 from invenio_records_rest.serializers.datacite import DataCite31Serializer, \
     OAIDataCiteSerializer
-from invenio_records_rest.serializers.dc import DublinCoreSerializer
+#from invenio_records_rest.serializers.dc import DublinCoreSerializer
 from invenio_records_rest.serializers.response import record_responsify, \
     search_responsify
 
@@ -46,6 +46,8 @@ from .schemas.json import DepositSchemaV1, RecordSchemaV1
 from .schemas.legacyjson import FileSchemaV1, GitHubRecordSchemaV1, \
     LegacyRecordSchemaV1, DepositFormSchemaV1
 from .schemas.marc21 import RecordSchemaMARC21
+from .dc_repo import DublinCoreRepoSerializer
+
 
 # Serializers
 # ===========
@@ -78,7 +80,7 @@ oai_datacite = OAIDataCiteSerializer(
     datacentre='CERN.ZENODO',
 )
 #: Dublin Core serializer
-dc_v1 = DublinCoreSerializer(DublinCoreV1, replace_refs=True)
+dc_v1 = DublinCoreRepoSerializer(DublinCoreV1, replace_refs=True)
 #: CSL-JSON serializer
 csl_v1 = JSONSerializer(RecordSchemaCSLJSON, replace_refs=True)
 #: CSL Citation Formatter serializer

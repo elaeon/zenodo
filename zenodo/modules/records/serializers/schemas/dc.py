@@ -64,11 +64,17 @@ class DublinCoreV1(Schema):
 
     def get_creators(self, obj):
         """Get creators."""
-        #print(obj['metadata'].get('creators', []))
-        return [c['name'] for c in obj['metadata'].get('creators', [])]
+        creators = []
+        for c in obj['metadata'].get('creators', []):
+            if c.get("orcid", ''):
+                creators.append({"text": c['name'], 
+                    "id": "info:eu-repo/dai/mx/orcid/{}".format(c.get("orcid", ''))})
+            else:
+                creators.append(c['name'])
+        return creators
 
     def get_relations(self, obj):
-        """Get creators."""
+        """Get relations."""
         rels = []
         # Grants
         for g in obj['metadata'].get('grants', []):
