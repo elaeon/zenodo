@@ -104,6 +104,14 @@ class DublinCoreV1(Schema):
             u'info:eu-repo/semantics/{}Access'.format(
                 obj['metadata']['access_right'])]
         license_url = obj['metadata'].get('license', {}).get('url')
+        
+        def reformat_licence_conacyt(license_url):
+            license_url = license_url.replace("https", "http")
+            if license_url[-1] == "/":
+                license_url = license_url[:-1]
+            return license_url
+
+        license_url = reformat_licence_conacyt(license_url)
         if license_url:
             rights.append(license_url)
         return rights
