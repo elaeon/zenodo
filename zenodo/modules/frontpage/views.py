@@ -108,7 +108,7 @@ def padron():
     )
 
 
-@blueprint.route('/raking/articulos')
+@blueprint.route('/ranking/articulos')
 def raking_articulos():
     """Base information"""
 
@@ -134,12 +134,12 @@ def descargas():
     """Base information"""
 
     today = datetime.date.today().strftime("%Y-%m-%d")
-    url = "http://estadisticas.inmegen.gob.mx/index.php?module=API&method=Actions.getDownloads&idSite=9&period=range&date=2017-06-30,{today}&filter_limit=15&format=JSON&token_auth={token}".format(token=current_app.config["TOKEN_AUTH_PIWIK"], today=today)
+    url = "http://estadisticas.inmegen.gob.mx/index.php?module=API&method=Actions.getDownloads&idSite=9&period=range&date=2017-06-30,{today}&expanded=0&flat=1&filter_limit=15&format=JSON&token_auth={token}".format(token=current_app.config["TOKEN_AUTH_PIWIK"], today=today)
     r = requests.get(url)
     data = r.json()
     descargas = []
     for record in data:
-        articulos.append({
+        descargas.append({
             "id": record["url"],
             "numero": record["nb_hits"]
         })
